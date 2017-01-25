@@ -15,7 +15,23 @@
 `openMVG_main_IncrementalSfM -i ./matches/sfm_data.json -o ./sfm -m ./matches`
 
 ### Convert SfM to openMVS format
-`openMVG_main_openMVG2openMVS -i sfm/sfm_data.bin -d mvs/images -o mvs/scene.mvs`
+`mkdir mvs && openMVG_main_openMVG2openMVS -i sfm/sfm_data.bin -d mvs/images -o mvs/scene.mvs`
 
 
 
+
+### Dense Point-Cloud Reconstruction
+`DensifyPointCloud ./mvs/scene.mvs`
+
+	if got `killed` it bacause run out of memory
+	set --resolution-level to 3 will lower the computation
+	`DensifyPointCloud ./mvs/scene.mvs --resolution-level 3`
+
+### Rough Mesh Reconstruction
+`ReconstructMesh ./mvs/scene_dense.mvs`
+
+### Mesh Refinement
+`RefineMesh ./mvs/scene_dense_mesh.mvs`
+
+### Mesh Texturing
+`TextureMesh ./mvs/scene_dense_mesh_refine.mvs`
