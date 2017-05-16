@@ -1,3 +1,9 @@
+### In the dockerfile folder
+`docker build . -t 3d/mesh:latest`
+
+### mount the sample data folder to openmvs container
+`docker run -v /Users/yong/datasets:/home -i -t 3d/mesh`
+
 ### add camera to OpenMVG DB
 `openMVG_main_ParseDatabase -i /usr/local/bin/cameraGenerated.txt -m "Canon EOS 600D[NUL][NUL][NUL][NUL][NUL][NUL][NUL][NUL][NUL]" -b Canon`
 ^ didn't work, added `Canon EOS Rebel T3i;22.3` to `sensor_width_camera_database.txt` instead
@@ -18,9 +24,7 @@
 `mkdir mvs && openMVG_main_openMVG2openMVS -i sfm/sfm_data.bin -d mvs/images -o mvs/scene.mvs`
 
 
-
-
-### Dense Point-Cloud Reconstruction
+### use openMVS to get dense Point-Cloud Reconstruction
 `DensifyPointCloud ./mvs/scene.mvs`
 
 	if got `killed` it bacause run out of memory
